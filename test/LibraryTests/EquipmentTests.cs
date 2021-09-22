@@ -30,7 +30,8 @@ namespace LibraryTests
             double hourlyCost = 9.99;
             string json = $@"{{""Description"":""{description}"",""HourlyCost"":{hourlyCost}}}";
 
-            Equipment equipment = new Equipment(json);
+            Equipment equipment = new Equipment("",0);
+            equipment.LoadFromJson(json);
 
             Assert.AreEqual(description, equipment.Description);
             Assert.AreEqual(hourlyCost, equipment.HourlyCost);

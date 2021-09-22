@@ -9,9 +9,9 @@ using System.Collections;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Recipies
+namespace Recipies 
 {
-    public class Recipe
+    public class Recipe : IJsonConvertible
     {
         // private ArrayList steps = new ArrayList();
         public Product FinalProduct { get; set; }
@@ -28,6 +28,18 @@ namespace Recipies
         public void RemoveStep(Step step)
         {
             this.Steps.Remove(step);
+        }
+
+        public void LoadFromJson(string json)
+        {
+                Recipe recipe = JsonSerializer.Deserialize<Recipe>(json);
+                this.FinalProduct = recipe.FinalProduct;
+                this.Steps = recipe.Steps;
+        }
+
+        public string ConvertToJson()
+        {
+            return JsonSerializer.Serialize(this);
         }
     }
 }
